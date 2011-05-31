@@ -1,0 +1,436 @@
+TWHRTF
+v7
+r0
+t328475782.179289
+cCheck dependencies
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/main.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileCuda WHRTF.cu
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/whrtf-E898E88C3136525B.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/ReadHrtf.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MathUtil.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MsgUtil.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/sparseCoefficients.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c normal i386 c com.apple.compilers.gcc.4_2
+cLd /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF normal i386
+
+N/Developer/SDKs/MacOSX10.5.sdk
+c000000004A49A9E400000000000000EE
+t1246341604
+s238
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/include/math.h
+c0000000047BA987000000000000004B7
+t1203411056
+s1207
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/include/stdio.h
+c0000000047BA99310000000000003D1D
+t1203411249
+s15645
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/include/stdlib.h
+c0000000047BA99310000000000002A79
+t1203411249
+s10873
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/include/string.h
+c0000000047BA99320000000000001731
+t1203411250
+s5937
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/include/sys/time.h
+c0000000047E883D20000000000001E18
+t1206420434
+s7704
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/limits.h
+c000000004A11EAF10000000000000C7E
+t1242688241
+s3198
+
+N/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stddef.h
+c000000004A11EAF10000000000003197
+t1242688241
+s12695
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c
+c000000004DDEB84900000000000009E8
+t1306441801
+s2536
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i<math.h>
+i"MathUtil.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.h
+c000000004DDBA63E0000000000000390
+t1306240574
+s912
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c
+c000000004DDBA641000000000000028A
+t1306240577
+s650
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i"MsgUtil.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.h
+c000000004DDBA6430000000000000197
+t1306240579
+s407
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c
+c000000004DDEBD8200000000000016E1
+t1306443138
+s5857
+i<stdio.h>
+i<stdlib.h>
+i<string.h>
+i<math.h>
+i"MsgUtil.h"
+i"MathUtil.h"
+i"ReadHrtf.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.h
+c000000004DDBA5C600000000000001CD
+t1306240454
+s461
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu
+c000000004DE3D6B4000000000000E289
+t1306777268
+s57993
+i<stdlib.h>
+i<stdio.h>
+i<string.h>
+i<math.h>
+i<sys/time.h>
+i"runtime.h"
+i<cufft.h>
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF
+t1306782955
+s167392
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MathUtil.o
+t1306782955
+s5196
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MsgUtil.o
+t1306782955
+s2392
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/ReadHrtf.o
+t1306782955
+s8784
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/WHRTF.LinkFileList
+c000000004DE3EBAA0000000000000307
+t1306782634
+s775
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/WHRTF.cu_o
+t1306782636
+s131788
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/main.o
+t1306782955
+s5744
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/sparseCoefficients.o
+t1306782955
+s12412
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/whrtf-E898E88C3136525B.o
+t1306782955
+s8680
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/libcudart.dylib
+c000000004DDBA3FF00000000000BF8A8
+t1306239999
+s784552
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c
+c000000004DE3D3F60000000000000A18
+t1306776566
+s2584
+i<stdio.h>
+i<stdlib.h>
+i<math.h>
+i<sys/time.h>
+i"runtime.h"
+i"whrtf.h"
+i"sparseCoefficients.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/runtime.h
+c000000004DDEC9FD000000000000029B
+t1306446333
+s667
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c
+c000000004DE128C90000000000001EB5
+t1306601673
+s7861
+i<stdio.h>
+i<stdlib.h>
+i<math.h>
+i"whrtf.h"
+i"sparseCoefficients.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.h
+c000000004DDFEA1400000000000001E6
+t1306520084
+s486
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c
+c000000004DE3D6180000000000000EAC
+t1306777112
+s3756
+i<stdio.h>
+i<stdlib.h>
+i"whrtfConstants.h"
+i"ReadHrtf.h"
+i"MathUtil.h"
+i"runtime.h"
+i"whrtf.h"
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.h
+c000000004DE130920000000000000250
+t1306603666
+s592
+
+N/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtfConstants.h
+c000000004DDFD9B60000000000000252
+t1306515894
+s594
+
+N/usr/local/cuda/include/builtin_types.h
+c000000004CDC9074000000000000095A
+t1289523316
+s2394
+i"device_types.h"
+i"driver_types.h"
+i"surface_types.h"
+i"texture_types.h"
+i"vector_types.h"
+
+N/usr/local/cuda/include/cuComplex.h
+c000000004CDC90740000000000002AF4
+t1289523316
+s10996
+i<math.h>
+i"vector_types.h"
+
+N/usr/local/cuda/include/cufft.h
+c000000004CDC90740000000000001DA4
+t1289523316
+s7588
+i<stdio.h>
+i"cuComplex.h"
+i"driver_types.h"
+
+N/usr/local/cuda/include/device_types.h
+c000000004CDC907400000000000009AA
+t1289523316
+s2474
+
+N/usr/local/cuda/include/driver_types.h
+c000000004CDC9074000000000000725F
+t1289523316
+s29279
+i<limits.h>
+i<stddef.h>
+
+N/usr/local/cuda/include/host_defines.h
+c000000004CDC90740000000000001136
+t1289523316
+s4406
+
+N/usr/local/cuda/include/surface_types.h
+c000000004CDC90740000000000000DBD
+t1289523316
+s3517
+i"driver_types.h"
+
+N/usr/local/cuda/include/texture_types.h
+c000000004CDC9075000000000000105D
+t1289523317
+s4189
+i"driver_types.h"
+
+N/usr/local/cuda/include/vector_types.h
+c000000004CDC90750000000000002AA9
+t1289523317
+s10921
+i"builtin_types.h"
+i"host_defines.h"
+
+N/usr/local/cuda/lib/libcudart.dylib
+c000000004CDC907700000000000BF8A8
+t1289523319
+s784552
+
+N/usr/local/cuda/lib/libcufft.dylib
+c000000004CDC907A00000000038401D4
+t1289523322
+s58982868
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies328475782#328475782#0(0"0(0#1#0"8625930208#0"0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MathUtil.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.190559
+e328475755.503816
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MathUtil.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c328475755#328475755#0(0"0(0#0#51"/Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c8626255744#1542"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/MathUtil.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MathUtil.o0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MsgUtil.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.483426
+e328475755.527535
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MsgUtil.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@58"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c328475755#328475755#0(0"0(0#0#50"/Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c8627859808#1540"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/MsgUtil.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/MsgUtil.o0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/ReadHrtf.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.189659
+e328475755.512150
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/ReadHrtf.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c328475755#328475755#0(0"0(0#0#51"/Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c8626897760#1542"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/ReadHrtf.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/ReadHrtf.o0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/main.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.187701
+e328475755.506739
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/main.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main0':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:42: warning: control reaches end of non-void function
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:55: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:52: warning: unused variable 'whr'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main2':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:122: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:125: warning: unused variable 'atrasos'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:128: warning: control reaches end of non-void function
+lSLF07#2@55"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328475755#328475755#0(2376"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main0':/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:32: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:33: warning: implicit conversion shortens 64-bit value into a 32-bit value/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:42: warning: control reaches end of non-void function/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main':/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:55: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:52: warning: unused variable 'whr'/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c: In function 'main2':/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:122: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:125: warning: unused variable 'atrasos'/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c:128: warning: control reaches end of non-void function18(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#70#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#32#0#32#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#193#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#32#0#32#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#316#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#32#0#32#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#439#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#32#0#32#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#562#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#32#0#32#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#685#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#808#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#931#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#1054#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#1177#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#1300#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@61"Implicit conversion shortens 64-bit value into a 32-bit value328475755#1423#123#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#33#0#33#0#61"implicit conversion shortens 64-bit value into a 32-bit value0(22@40"Control reaches end of non-void function328475755#1546#102#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#42#0#42#0#40"control reaches end of non-void function0(22@95"Format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475755#1717#157#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#55#0#55#0#56"format '*' expects type '*', but argument * has type '*'0(22@21"Unused variable 'whr'328475755#1874#83#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#52#0#52#0#19"unused variable '*'0(22@95"Format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475755#2027#158#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#122#0#122#0#56"format '*' expects type '*', but argument * has type '*'0(22@25"Unused variable 'atrasos'328475755#2185#88#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#125#0#125#0#19"unused variable '*'0(22@40"Control reaches end of non-void function328475755#2273#103#0(6@47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c328469366#128#0#128#0#40"control reaches end of non-void function0(0#0#47"/Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c8627664192#1534"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/main.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/main.o0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/sparseCoefficients.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.503950
+e328475755.599577
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/sparseCoefficients.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@69"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c328475755#328475755#0(0"0(0#0#61"/Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c8627025696#1562"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/sparseCoefficients.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/sparseCoefficients.o0#
+
+CCompileC build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/whrtf-E898E88C3136525B.o /Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c normal i386 c com.apple.compilers.gcc.4_2
+s328475755.188783
+e328475755.483292
+r1
+xCompileC
+xbuild/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/whrtf-E898E88C3136525B.o
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'getCoefSpars':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:77: warning: passing argument 1 of 'coef_spars' from incompatible pointer type
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'getRespImp':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:113: warning: passing argument 1 of 'resp_imp' from incompatible pointer type
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'whrtf':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:122: warning: implicit declaration of function 'gettimeofday'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:126: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:132: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+lSLF07#2@56"Compile /Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328475755#328475755#0(909"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'getCoefSpars':/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:77: warning: passing argument 1 of 'coef_spars' from incompatible pointer type/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'getRespImp':/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:113: warning: passing argument 1 of 'resp_imp' from incompatible pointer type/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c: In function 'whrtf':/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:122: warning: implicit declaration of function 'gettimeofday'/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:126: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c:132: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'5(22@65"Passing argument 1 of 'coef_spars' from incompatible pointer type328475755#78#128#0(6@48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328469912#77#0#77#0#56"passing argument * of '*' from incompatible pointer type0(22@63"Passing argument 1 of 'resp_imp' from incompatible pointer type328475755#282#127#0(6@48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328469912#113#0#113#0#56"passing argument * of '*' from incompatible pointer type0(22@47"Implicit declaration of function 'gettimeofday'328475755#480#111#0(6@48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328469912#122#0#122#0#36"implicit declaration of function '*'0(22@95"Format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475755#591#159#0(6@48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328469912#126#0#126#0#56"format '*' expects type '*', but argument * has type '*'0(22@95"Format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475755#750#159#0(6@48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c328469912#132#0#132#0#56"format '*' expects type '*', but argument * has type '*'0(0#0#48"/Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c8626933792#1553"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -Wshorten-64-to-32 -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -mmacosx-version-min=10.5 -gdwarf-2 -fopenmp -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-generated-files.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-own-target-headers.hmap -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-all-target-headers.hmap -iquote /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/WHRTF-project-headers.hmap -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -iquote/usr/local/cuda/include -iquote/usr/local/cuda/include/crt -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc" -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources/i386 -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/DerivedSources -pg -g -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/whrtf.c -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/whrtf-E898E88C3136525B.o0#
+
+CCompileCuda WHRTF.cu
+s328475434.313355
+e328475436.559693
+r1
+xCompileCuda
+xWHRTF.cu
+onvcc warning : option 'host-compilation' has been deprecated and is ignored
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661:2: warning: "/*" within comment
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663:1: warning: "/*" within comment
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(310): warning: variable "maxRadius" was declared but never referenced
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1661): warning: nested comment is not allowed
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1663): warning: nested comment is not allowed
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661:2: warning: "/*" within comment
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663:1: warning: "/*" within comment
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(310): warning: variable "maxRadius" was declared but never referenced
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1661): warning: nested comment is not allowed
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1663): warning: nested comment is not allowed
+o
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'float* convFFT(float*, int, float*, int)':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:217: warning: comparison between signed and unsigned integer expressions
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:226: warning: comparison between signed and unsigned integer expressions
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:277: warning: unused variable 'h_convolved_signal_ref'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'int PadData(const Complex*, Complex**, int, const Complex*, Complex**, int)':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:310: warning: unused variable 'maxRadius'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'void dec_poly(int, float*, int, float**, int*, float***, float***)':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1192: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1211: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'void coef_spars(char**, int, float*, int, float**, int*)':
+o/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1325: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'
+lSLF07#2@20"CompileCuda WHRTF.cu328475434#328475436#0(2485"nvcc warning : option 'host-compilation' has been deprecated and is ignored/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661:2: warning: "/*" within comment/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663:1: warning: "/*" within comment/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(310): warning: variable "maxRadius" was declared but never referenced/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1661): warning: nested comment is not allowed/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1663): warning: nested comment is not allowed/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661:2: warning: "/*" within comment/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663:1: warning: "/*" within comment/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(310): warning: variable "maxRadius" was declared but never referenced/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1661): warning: nested comment is not allowed/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu(1663): warning: nested comment is not allowed/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'float* convFFT(float*, int, float*, int)':/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:217: warning: comparison between signed and unsigned integer expressions/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:226: warning: comparison between signed and unsigned integer expressions/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:277: warning: unused variable 'h_convolved_signal_ref'/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'int PadData(const Complex*, Complex**, int, const Complex*, Complex**, int)':/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:310: warning: unused variable 'maxRadius'/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'void dec_poly(int, float*, int, float**, int*, float***, float***)':/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1192: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1211: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu: In function 'void coef_spars(char**, int, float*, int, float**, int*)':/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1325: warning: format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'17(22@19""/*" within comment328475434#18446744073709551615#0#0(6@54"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661328475434#2#0#2#0#0"0(22@19""/*" within comment328475434#18446744073709551615#0#0(6@54"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663328475434#1#0#1#0#0"0(22@54"variable "maxRadius" was declared but never referenced328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#310#0#310#0#0"0(22@29"nested comment is not allowed328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1661#0#1661#0#0"0(22@29"nested comment is not allowed328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1663#0#1663#0#0"0(22@19""/*" within comment328475435#18446744073709551615#0#0(6@54"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1661328475435#2#0#2#0#0"0(22@19""/*" within comment328475435#18446744073709551615#0#0(6@54"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu:1663328475435#1#0#1#0#0"0(22@54"variable "maxRadius" was declared but never referenced328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#310#0#310#0#0"0(22@29"nested comment is not allowed328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1661#0#1661#0#0"0(22@29"nested comment is not allowed328475435#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1663#0#1663#0#0"0(22@58"comparison between signed and unsigned integer expressions328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#217#0#217#0#0"0(22@58"comparison between signed and unsigned integer expressions328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#226#0#226#0#0"0(22@40"unused variable 'h_convolved_signal_ref'328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#277#0#277#0#0"0(22@27"unused variable 'maxRadius'328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#310#0#310#0#0"0(22@95"format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1192#0#1192#0#0"0(22@95"format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1211#0#1211#0#0"0(22@95"format '%06lu' expects type 'long unsigned int', but argument 3 has type '__darwin_suseconds_t'328475436#18446744073709551615#0#0(6@49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu328470068#1325#0#1325#0#0"0(0#0#49"/Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu8643327328#557"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    /usr/local/cuda/bin/nvcc -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/WHRTF.cu_o -c /Users/diego/Dev/Projetos/Mestrado/WHRTF/WHRTF.cu -g -O0 -use_fast_math --host-compilation=c --compiler-options=-Wall -I/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/include "-I/Developer/GPU Computing/C/common/inc/cudpp" "-I/Developer/GPU Computing/C/common/inc/GL" "-I/Developer/GPU Computing/C/common/inc/dynlink" "-I/Developer/GPU Computing/C/common/inc"0#
+
+CLd /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF normal i386
+s328475755.599701
+e328475755.814681
+r1
+xLd
+x/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF
+xnormal
+xi386
+lSLF07#2@63"Link /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF328475755#328475755#0(0"0(0#0#0"8626813152#752"    cd /Users/diego/Dev/Projetos/Mestrado/WHRTF    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug "-L/Developer/GPU Computing/C/common/lib" -L/usr/local/cuda/lib -L/Users/diego/Dev/Projetos/Mestrado/WHRTF -L/usr/local/cuda/lib -F/Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug -filelist /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/WHRTF.build/Debug/WHRTF.build/Objects-normal/i386/WHRTF.LinkFileList -Xlinker -rpath -Xlinker /usr/local/cuda/lib -mmacosx-version-min=10.5 -fopenmp -lcudart -lcuda -lcudart -lcudart -lcufft -shared-libgcc -lstdc++-static -o /Users/diego/Dev/Projetos/Mestrado/WHRTF/build/Debug/WHRTF0#
+
