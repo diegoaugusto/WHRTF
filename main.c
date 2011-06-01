@@ -46,6 +46,8 @@ int main (int argc, char * const argv[]) {
 	int azim = 90;
 	char ear = 'L';
 	
+	initCUDA();
+	
 	INIT_VARIABLES;
 	INIT_RUNTIME;
 	int whrtfLength;

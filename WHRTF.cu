@@ -70,11 +70,13 @@ void checkCUDAError(const char *msg);
 
 
 // Extern functions
+extern "C" void initCUDA(void);
 extern "C" short* findDelay(float** hrtf, int length);
 extern "C" float* shiftInParallel(float* vec, int vecLength, short delay, int maxLength);
 extern "C" void coef_spars(char* filtro[], int filtroLength, float* ho1d, int ho1dLength, float** G_aux, int* G_size);
 extern "C" float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* resultLength);
 extern "C" float* convFFT(float* signal, int signalLength, float* filter, int filterLength);
+extern "C" void coef_spars2(char* filtro[], int numFiltros, float* ho1d, int ho1dLength, float** G_aux, int* G_size);
 
 
 // ################## Device code
@@ -169,6 +171,11 @@ __global__ void conv(float* u, int uLength, float* v, int vLength, float* w, int
 	}
 }
 
+
+void initCUDA(void) {
+	char* d_char;
+	cudaMalloc((void**)&d_char, sizeof(char));
+}
 
 float* convSimple(float* signal, int signalLength, float* filter, int filterLength) {
     int new_size = signalLength + filterLength - 1;
@@ -705,13 +712,6 @@ void cascataFFT(char* filtros[], int numFiltros, float** filterBank, int* filter
 	float* Gl_old = NULL;
 	filtroLength = hLength;
 	
-	cudaEvent_t	start, stop;
-	float	elapsedTime;
-	// start the timers
-	cudaEventCreate( &start ); 
-	cudaEventCreate( &stop ); 
-	cudaEventRecord( start, 0 );
-	
 	for (int i = 1; i < numFiltros; i++) {
 		Gl_old = (float*) calloc(filtroLength, sizeof(float));
 		for (int j = 0; j < filtroLength; j++) {
@@ -763,11 +763,6 @@ void cascataFFT(char* filtros[], int numFiltros, float** filterBank, int* filter
 	free(Gl_old);
 	free(Gl);
 	
-	cudaEventRecord( stop, 0 );
-	cudaEventSynchronize( stop ); 
-	cudaEventElapsedTime( &elapsedTime, start, stop ); 
-	//printf( "Time taken cascataFFT: %3.1f ms\n", elapsedTime );
-	
 	int maxLength = max(filterBankLengthAux, (numFiltros + 1));
 	
 	for (int i = numFiltros; i >= 0; i--) {
@@ -779,6 +774,86 @@ void cascataFFT(char* filtros[], int numFiltros, float** filterBank, int* filter
 	}
 }
 
+float* multiplyPolynomialCoefficients(float* vecA, int vecASize, float* vecB, int vecBSize, int resultLength) {
+	float* vecC = (float*) calloc(resultLength, sizeof(float));
+	for (int i = 0; i < vecASize; i++) {
+		for (int j = 0; j < vecBSize; j++) {
+			vecC[i+j] = vecC[i+j] + (vecA[i] * vecB[j]);
+		}
+	}
+	return vecC;
+}
+
+float* sumPolynomialCoefficients(float* dev_aux1, float* dev_aux2, int resultSize) {
+	float* dev_aux_sum = (float*) calloc(resultSize, sizeof(float));
+	for (int i = 0; i < resultSize; i++) {
+		dev_aux_sum[i] = dev_aux1[i] + dev_aux2[i];
+	}
+	return dev_aux_sum;
+}
+
+float*** computeIpAuxHost(float*** Hp, int hlength, float*** Fp, int flength) {
+	float *dev_aux1, *dev_aux2;
+	int resultLength = (hlength + flength - 1);
+	
+	float*** Ip_aux = (float***) malloc(2 * sizeof(float**));
+	Ip_aux[0] = (float**) malloc(2 * sizeof(float*));
+	Ip_aux[1] = (float**) malloc(2 * sizeof(float*));
+	
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			Ip_aux[i][j] = (float*) malloc(resultLength*sizeof(float*));
+		}
+	}
+	
+	/*
+	 Ip_aux = Fp*Hp;
+	 O resultado é uma matriz 2x2x7.
+	 
+	 aA+bC	aB+bD
+	 cA+dC	cB+dD
+	 */
+	
+	/* 00 */	
+	dev_aux1 = multiplyPolynomialCoefficients(Fp[0][0], hlength, Hp[0][0], hlength, resultLength);
+	dev_aux2 = multiplyPolynomialCoefficients(Fp[0][1], hlength, Hp[1][0], hlength, resultLength);
+	Ip_aux[0][0] = sumPolynomialCoefficients(dev_aux1, dev_aux2, resultLength);
+	
+	
+	/* 01 */
+	// clean auxiliary variables
+	free(dev_aux1); dev_aux1 = NULL;
+	free(dev_aux2); dev_aux2 = NULL;
+	
+	dev_aux1 = multiplyPolynomialCoefficients(Fp[0][0], hlength, Hp[0][1], hlength, resultLength);
+	dev_aux2 = multiplyPolynomialCoefficients(Fp[0][1], hlength, Hp[1][1], hlength, resultLength);
+	Ip_aux[0][1] = sumPolynomialCoefficients(dev_aux1, dev_aux2, resultLength);
+	
+	
+	/* 10 */
+	// clean auxiliary variables
+	free(dev_aux1); dev_aux1 = NULL;
+	free(dev_aux2); dev_aux2 = NULL;
+	
+	dev_aux1 = multiplyPolynomialCoefficients(Fp[1][0], hlength, Hp[0][0], hlength, resultLength);
+	dev_aux2 = multiplyPolynomialCoefficients(Fp[1][1], hlength, Hp[1][0], hlength, resultLength);
+	Ip_aux[1][0] = sumPolynomialCoefficients(dev_aux1, dev_aux2, resultLength);
+	
+	
+	/* 11 */
+	// clean auxiliary variables
+	free(dev_aux1); dev_aux1 = NULL;
+	free(dev_aux2); dev_aux2 = NULL;
+	
+	dev_aux1 = multiplyPolynomialCoefficients(Fp[1][0], hlength, Hp[0][1], hlength, resultLength);
+	dev_aux2 = multiplyPolynomialCoefficients(Fp[1][1], hlength, Hp[1][1], hlength, resultLength);
+	Ip_aux[1][1] = sumPolynomialCoefficients(dev_aux1, dev_aux2, resultLength);
+	
+	free(dev_aux1); dev_aux1 = NULL;
+	free(dev_aux2); dev_aux2 = NULL;
+	
+	return Ip_aux;
+}
 
 /**
  * Essa função computa a multiplicação das matrizes Fp e Hp. Ip_aux = Fp*Hp.
@@ -853,8 +928,8 @@ float*** computeIpAux(float*** Hp, int hlength, float*** Fp, int flength) {
 	initializeArray<<<4,4>>>(dev_aux2, resultLength);
 	
 	// Invoke kernel
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_a0, hlength, dev_A0, hlength, dev_aux1);
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_b0, hlength, dev_C0, hlength, dev_aux2);	
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_a0, hlength, dev_A0, hlength, dev_aux1);
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_b0, hlength, dev_C0, hlength, dev_aux2);	
 	
 	sumPolynomialCoefficientsKernel<<<resultSize, 1>>>(dev_aux1, dev_aux2, dev_aux_sum, resultLength);
 	
@@ -868,8 +943,8 @@ float*** computeIpAux(float*** Hp, int hlength, float*** Fp, int flength) {
 	initializeArray<<<4,4>>>(dev_aux2, resultLength);
 
 	// Invoke kernel
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_a0, hlength, dev_B0, hlength, dev_aux1);
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_b0, hlength, dev_D0, hlength, dev_aux2);
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_a0, hlength, dev_B0, hlength, dev_aux1);
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_b0, hlength, dev_D0, hlength, dev_aux2);
 	
 	sumPolynomialCoefficientsKernel<<<resultSize, 1>>>(dev_aux1, dev_aux2, dev_aux_sum, resultLength);
 	
@@ -883,8 +958,8 @@ float*** computeIpAux(float*** Hp, int hlength, float*** Fp, int flength) {
 	initializeArray<<<4,4>>>(dev_aux2, resultLength);
 	
 	// Invoke kernel
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_c0, hlength, dev_A0, hlength, dev_aux1);
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_d0, hlength, dev_C0, hlength, dev_aux2);	
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_c0, hlength, dev_A0, hlength, dev_aux1);
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_d0, hlength, dev_C0, hlength, dev_aux2);	
 	
 	sumPolynomialCoefficientsKernel<<<resultSize, 1>>>(dev_aux1, dev_aux2, dev_aux_sum, resultLength);
 	
@@ -898,8 +973,8 @@ float*** computeIpAux(float*** Hp, int hlength, float*** Fp, int flength) {
 	initializeArray<<<4,4>>>(dev_aux2, resultLength);
 
 	// Invoke kernel
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_c0, hlength, dev_B0, hlength, dev_aux1);
-    multiplyPolynomialCoefficientsKernel<<<hlength, 1>>>(dev_d0, hlength, dev_D0, hlength, dev_aux2);	
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_c0, hlength, dev_B0, hlength, dev_aux1);
+    multiplyPolynomialCoefficientsKernel<<<4, 4>>>(dev_d0, hlength, dev_D0, hlength, dev_aux2);	
 	
 	sumPolynomialCoefficientsKernel<<<resultSize, 1>>>(dev_aux1, dev_aux2, dev_aux_sum, resultLength);
 	
@@ -1224,6 +1299,7 @@ void dec_poly(int hlength, float* sist, int sistLength, float** G, int* G_size, 
 	}
 }
 
+
 /**
  *	Obtém os coeficientes esparsos que equivalem o sistema ho1d.
  */
@@ -1345,6 +1421,359 @@ void coef_spars(char* filtro[], int numFiltros, float* ho1d, int ho1dLength, flo
 	}	
 }
 
+
+/**
+ *	2
+ */
+void dec_poly2(float** coefSpars, int numFiltros, int hlength, float* sist, int sistLength, int* G_size, float*** Hp, float*** Fp) {	
+	// Rp
+	float *dev_x0 = NULL;
+	float *dev_y0 = NULL;
+
+    // Fp
+	float *dev_a0 = NULL;
+	float *dev_b0 = NULL;
+	float *dev_c0 = NULL;
+	float *dev_d0 = NULL;
+	
+	// Ip
+	float *dev_A0 = NULL;
+	float *dev_B0 = NULL;
+	float *dev_C0 = NULL;
+	float *dev_D0 = NULL;
+	
+	float *dev_aux1, *dev_aux2, *dev_aux3, *dev_aux4, *dev_aux_sum1, *dev_aux_sum2 ;
+	float **Gp;
+
+	float** G = (float**) malloc(2 * sizeof(float*));	// sempre tem tamanho 2
+	float** Rp = (float**) calloc(2, sizeof(float*));
+	int m = 2;
+	int n = hlength;
+	int atraso = round((n-m)/2.0);
+	double esparsidade = 2.0;
+	
+	INIT_VARIABLES;
+	
+	/*
+		Decomposicao polifasica dos bancos de sintese e analise
+		matrizes Fp e Hp
+	
+	Ip_aux = Fp*Hp;
+	O resultado é uma matriz 2x2x7.
+	
+	H[0][1]*F[0][0] + H[0][0]*F[1][0]	H[0][1]*F[0][1] + H[0][0]*F[1][1]
+	H[1][1]*F[0][0] + H[1][0]*F[1][0]	H[1][1]*F[0][1] + H[1][0]*F[1][1]
+	*/
+	// Hp e Fp são matrizes (cubos) de dimensão: [2][2][7]
+	
+	INIT_RUNTIME;
+	//float*** ip_aux = computeIpAux(Hp, hlength/2, Fp, hlength/2);
+	float*** ip_aux = computeIpAuxHost(Hp, hlength/2, Fp, hlength/2);
+	END_RUNTIME; printf("[computeIpAuxHost]: "); PRINT_RUNTIME;
+	
+	int fpLength = (hlength/2);
+	int ipLength = hlength - 1;
+	int sizeFpElement = fpLength * sizeof(float);
+	int sizeIpElement = ipLength * sizeof(float);
+	
+	INIT_RUNTIME;	
+	cudaMalloc( (void**)&dev_a0, sizeFpElement );
+	cudaMalloc( (void**)&dev_b0, sizeFpElement );
+	cudaMalloc( (void**)&dev_c0, sizeFpElement );
+	cudaMalloc( (void**)&dev_d0, sizeFpElement );
+	cudaMalloc( (void**)&dev_A0, sizeIpElement );
+	cudaMalloc( (void**)&dev_B0, sizeIpElement );
+	cudaMalloc( (void**)&dev_C0, sizeIpElement );
+	cudaMalloc( (void**)&dev_D0, sizeIpElement );
+	
+	cudaMemcpy(dev_a0, Fp[0][0], sizeFpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_b0, Fp[0][1], sizeFpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_c0, Fp[1][0], sizeFpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_d0, Fp[1][1], sizeFpElement, cudaMemcpyHostToDevice );
+	
+	cudaMemcpy(dev_A0, ip_aux[0][0], sizeIpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_B0, ip_aux[0][1], sizeIpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_C0, ip_aux[1][0], sizeIpElement, cudaMemcpyHostToDevice );
+	cudaMemcpy(dev_D0, ip_aux[1][1], sizeIpElement, cudaMemcpyHostToDevice );	
+	END_RUNTIME; printf("[cuda malloc e memcpy]: "); PRINT_RUNTIME;
+	
+	INIT_RUNTIME;
+	for (int j = 0; j < numFiltros; j++) {
+		Rp[0] = (float*) calloc((sistLength % 2 == 0 ? (sistLength/2) : (sistLength/2 + 1)), sizeof(float));
+		Rp[1] = (float*) calloc((sistLength/2), sizeof(float));
+
+		for (int i = 0; i < sistLength; i++) {
+			if (i % 2 == 0) {
+				Rp[0][i/2] = sist[i];
+			} else {
+				Rp[1][i/2] = sist[i];
+			}
+		}
+		
+		int rpLength = sistLength;
+		int lengthX = (rpLength % 2 == 0 ? rpLength/2 : (rpLength/2+1));
+		int lengthY = rpLength/2;
+		int sizeX = lengthX * sizeof(float);
+		int sizeY = lengthY * sizeof(float);
+		int partialResultLengthX = lengthX + fpLength - 1;
+		int partialResultSizeX = partialResultLengthX * sizeof(float);
+		int partialResultLengthY = lengthY + fpLength - 1;
+		int partialResultSizeY = partialResultLengthY * sizeof(float);
+		int finalResultLength = (partialResultLengthX + ipLength -1);
+		int finalResultSize = finalResultLength * sizeof(float);
+		
+		cudaMalloc( (void**)&dev_x0, sizeX );
+		cudaMalloc( (void**)&dev_y0, sizeY );
+		
+		cudaMalloc( (void**)&dev_aux1, partialResultSizeX );
+		cudaMalloc( (void**)&dev_aux2, partialResultSizeY );
+		cudaMalloc( (void**)&dev_aux3, partialResultSizeX );
+		cudaMalloc( (void**)&dev_aux4, partialResultSizeY );
+	
+		cudaMalloc( (void**)&dev_aux_sum1, partialResultSizeX );
+		cudaMalloc( (void**)&dev_aux_sum2, partialResultSizeX );
+	
+		// Inicialização de array no dispositivo para evitar erros em leituras
+		initializeArray<<<16,16>>>(dev_aux1, partialResultLengthX);
+		initializeArray<<<16,16>>>(dev_aux2, partialResultLengthX);
+		initializeArray<<<16,16>>>(dev_aux3, partialResultLengthX);
+		initializeArray<<<16,16>>>(dev_aux4, partialResultLengthX);
+		initializeArray<<<16,16>>>(dev_aux_sum1, partialResultLengthX);
+		initializeArray<<<16,16>>>(dev_aux_sum2, partialResultLengthX);
+		
+		cudaMemcpy(dev_x0, Rp[0], sizeX, cudaMemcpyHostToDevice );
+		cudaMemcpy(dev_y0, Rp[1], sizeY, cudaMemcpyHostToDevice );
+		
+		/*
+		Gp = Rp*Fp*Ip;
+		O resultado é uma matriz 2x237.
+	
+		----- Parte 1
+		Rp		Fp
+		(x	y)	(a	c)
+				(b	d)
+	
+		Rp*Fp
+			xa+yb	xc+yd
+	
+		*/
+		// Invoke kernel
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_x0, lengthX, dev_a0, fpLength, dev_aux1);	
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_y0, lengthY, dev_b0, fpLength, dev_aux2);
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_x0, lengthX, dev_c0, fpLength, dev_aux3);
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_y0, lengthY, dev_d0, fpLength, dev_aux4);
+	
+		sumPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux1, dev_aux2, dev_aux_sum1, partialResultLengthX);
+		sumPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux3, dev_aux4, dev_aux_sum2, partialResultLengthX);
+		
+		// Re-Inicialização de array no dispositivo para evitar erros em leituras
+		cudaFree(dev_aux1);
+		cudaFree(dev_aux2);
+		cudaFree(dev_aux3);
+		cudaFree(dev_aux4);
+	
+		cudaMalloc( (void**)&dev_aux1, finalResultSize );
+		cudaMalloc( (void**)&dev_aux2, finalResultSize );
+		cudaMalloc( (void**)&dev_aux3, finalResultSize );
+		cudaMalloc( (void**)&dev_aux4, finalResultSize );
+	
+		initializeArray<<<16,16>>>(dev_aux1, finalResultLength);
+		initializeArray<<<16,16>>>(dev_aux2, finalResultLength);
+		initializeArray<<<16,16>>>(dev_aux3, finalResultLength);
+		initializeArray<<<16,16>>>(dev_aux4, finalResultLength);
+		
+		
+		/*
+		Gp = Rp*Fp*Ip;
+		O resultado é uma matriz 2x237.
+	
+		----- Parte 1
+		Rp		Fp
+		(x	y)	(a	c)
+				(b	d)
+	
+		Rp*Fp
+			xa+yb	xc+yd
+			  u		  v
+	
+		----- Parte 2	  
+		Rp*Fp	  Hp
+		(u	v)	(A	C)
+				(B	D)
+	
+		Rp*Fp*Ip
+			uA+vB	uC+vD
+	
+		*/
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux_sum1, partialResultLengthX, dev_A0, ipLength, dev_aux1);	
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux_sum2, partialResultLengthX, dev_B0, ipLength, dev_aux2);
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux_sum1, partialResultLengthX, dev_C0, ipLength, dev_aux3);
+		multiplyPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux_sum2, partialResultLengthX, dev_D0, ipLength, dev_aux4);
+	
+		// Cleaning data of auxiliary vectors
+		cudaFree(dev_aux_sum1);
+		cudaFree(dev_aux_sum2);
+		cudaMalloc( (void**)&dev_aux_sum1, finalResultSize );
+		cudaMalloc( (void**)&dev_aux_sum2, finalResultSize );
+	
+		// Reinicializa arrays u e v (resultado de Rp*Fp)
+		initializeArray<<<16,16>>>(dev_aux_sum1, finalResultLength);
+		initializeArray<<<16,16>>>(dev_aux_sum2, finalResultLength);
+	
+		sumPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux1, dev_aux2, dev_aux_sum1, finalResultLength);
+		sumPolynomialCoefficientsKernel<<<16, 16>>>(dev_aux3, dev_aux4, dev_aux_sum2, finalResultLength);
+		
+		Gp = (float**) malloc(2 * sizeof(float*));
+		Gp[0] = (float*) malloc(finalResultSize);
+		Gp[1] = (float*) malloc(finalResultSize);
+	
+		// copy the data from device to locked memory
+		cudaMemcpy(Gp[0], dev_aux_sum1, finalResultSize, cudaMemcpyDeviceToHost);
+		cudaMemcpy(Gp[1], dev_aux_sum2, finalResultSize, cudaMemcpyDeviceToHost);
+		
+		G_size[numFiltros-j] = ceil( ((sistLength + atraso +1)/esparsidade) +1);
+	
+		G[0] = (float*) malloc(G_size[numFiltros-j] * sizeof(float));
+		G[1] = (float*) malloc(G_size[numFiltros-j] * sizeof(float));
+	
+		for (int i = 0; i < G_size[numFiltros-j]; i++) {
+			G[0][i] = Gp[0][i+atraso];
+			G[1][i] = Gp[1][i+atraso];
+		}
+		
+		sistLength = G_size[numFiltros-j];
+		coefSpars[numFiltros-j] = G[1];
+		
+		sist = NULL;
+		sist = G[0];
+		
+		cudaFree(dev_x0);
+		cudaFree(dev_y0);
+		cudaFree(dev_aux1);
+		cudaFree(dev_aux2);
+		cudaFree(dev_aux3);
+		cudaFree(dev_aux4);
+		cudaFree(dev_aux_sum1);
+		cudaFree(dev_aux_sum2);
+	}
+	END_RUNTIME; printf("[loop]: "); PRINT_RUNTIME;
+	
+	G_size[0] = G_size[1];
+	coefSpars[0] = (float*) malloc(G_size[0] * sizeof(float));
+	for (int k = 0; k < G_size[0]; k++) {
+		coefSpars[0][k] = sist[k];
+	}
+	
+	cudaFree(dev_a0);
+	cudaFree(dev_b0);
+	cudaFree(dev_c0);
+	cudaFree(dev_d0);
+	cudaFree(dev_A0);
+	cudaFree(dev_B0);
+	cudaFree(dev_C0);
+	cudaFree(dev_D0);
+
+	//printf("Error dec_poly2: %s\n\n", cudaGetErrorString(cudaGetLastError()));
+	
+}
+
+/**
+ *	Obtém os coeficientes esparsos que equivalem o sistema ho1d.
+ */
+void coef_spars2(char* filtro[], int numFiltros, float* ho1d, int ho1dLength, float** G_aux, int* G_size) {
+	int mesmofiltro = 0;
+	float* sist = ho1d;
+	double** h;
+	float** coefSpars;
+	int filtroLength;
+	int sistLength = ho1dLength;
+
+	INIT_VARIABLES;
+
+	coefSpars = (float**) malloc((numFiltros+1) * sizeof(float*));
+	
+	if (!mesmofiltro) {
+		h = leFiltros(filtro[0], &filtroLength);
+		mesmofiltro = (0 < numFiltros-1 && strcmp(filtro[0], filtro[1]) == 0);
+	}
+	
+	// Banco de análise
+	double** H = (double**) malloc(2 * sizeof(double*));
+	H[0] = (double*) malloc(filtroLength * sizeof(double));
+	H[1] = (double*) malloc(filtroLength * sizeof(double));
+
+	// Banco de síntese
+	double** F = (double**) malloc(2 * sizeof(double*));
+	F[0] = (double*) malloc(filtroLength * sizeof(double));
+	F[1] = (double*) malloc(filtroLength * sizeof(double));
+	
+	/*
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Obtencao do banco de filtros
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	*/
+	int power = 1;
+	for (int i = filtroLength-1; i >= 0; i--) {
+		int reverseIndex = filtroLength-i-1;
+		double powerValue = pow((double)-1, (double)power++);
+		if (h[0][reverseIndex] + h[1][i]*powerValue != 0) {
+			break;	// Não é Daubechies
+		} else {
+			H[0][reverseIndex] = h[0][reverseIndex];
+			H[1][reverseIndex] = h[0][i]*powerValue;
+			F[0][reverseIndex] = h[1][reverseIndex]*powerValue;
+			F[1][reverseIndex] = h[1][i];
+		}
+	}
+	
+	float*** Hp = (float***) malloc(2 * sizeof(float**));
+	Hp[0] = (float**) malloc(2 * sizeof(float*));
+	Hp[1] = (float**) malloc(2 * sizeof(float*));
+	
+	float*** Fp = (float***) malloc(2 * sizeof(float**));
+	Fp[0] = (float**) malloc(2 * sizeof(float*));
+	Fp[1] = (float**) malloc(2 * sizeof(float*));
+	
+	for (int i = 0; i < 2; i++) {
+		Hp[0][i] = (float*) malloc((filtroLength/2) * sizeof(float));
+		Hp[1][i] = (float*) malloc((filtroLength/2) * sizeof(float));
+		Fp[0][i] = (float*) malloc((filtroLength/2) * sizeof(float));
+		Fp[1][i] = (float*) malloc((filtroLength/2) * sizeof(float));
+		for (int j = 0; j < (filtroLength/2); j++) {
+			Hp[0][i][j] = H[i][j*2];
+			Hp[1][i][j] = H[i][j*2+1];
+			
+			if (i == 0) {
+				Fp[0][i][j] = F[0][j*2+1];
+				Fp[1][i][j] = F[1][j*2+1];
+			} else {
+				Fp[0][i][j] = (-1) * F[1][filtroLength*i - (j*2+1)];
+				Fp[1][i][j] = F[0][filtroLength*i - (j*2+1)];
+			}
+		}
+	}
+	
+	INIT_RUNTIME;
+	dec_poly2(coefSpars, numFiltros, filtroLength, sist, sistLength, G_size, Hp, Fp);
+	END_RUNTIME; printf("[dec_poly2]: "); PRINT_RUNTIME;
+	
+	int maxG_size = max(G_size, (numFiltros+1));
+	for (int k = 0; k < (numFiltros+1); k++) {
+		G_aux[k] = (float*) malloc(maxG_size * sizeof(float));
+		int cont = 0;
+		while (cont < G_size[k]) {
+			G_aux[k][cont] = coefSpars[k][cont];
+			cont++;
+		}
+		while (cont < maxG_size) {
+			G_aux[k][cont] = 0.0;
+			cont++;
+		}
+	}
+}
+
+
+
 /**
  *	Função que retorna os primeiros X elementos de um vetor.
  */
@@ -1363,8 +1792,11 @@ double* getPartialVector(double* vec, int numOfElements) {
 float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* resultLength) {
 	float** filterBank = (float**) calloc((numFiltros + 1), sizeof(float));
 	int* filterBankLength = (int*) calloc((numFiltros + 1), sizeof(int));
-		
+	
+	INIT_VARIABLES;
+	INIT_RUNTIME;
 	cascataFFT(filtros, numFiltros, filterBank, filterBankLength);
+	END_RUNTIME; printf("\n[cascataFFT]: "); PRINT_RUNTIME;
 	
 	// TODO implementar calc_delta
 	int atrasos[5] = {1, 1, 8, 22, 50};
@@ -1387,8 +1819,10 @@ float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* r
 		// conv(filterBank[i], gaux[i])	
 		int convLength = (filterBankLength[i] + resultLength - 1);
 	
+		INIT_RUNTIME;
 		//r[i] = convFFT(filterBank[i], filterBankLength[i], gaux[i], resultLength);
 		r[i] = convSimple(filterBank[i], filterBankLength[i], gaux[i], resultLength);
+		END_RUNTIME; printf("\n[convSimple %d]: ", i); PRINT_RUNTIME;
 		
 		r_sizes[i] = convLength;	
 	}
@@ -1411,6 +1845,7 @@ float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* r
 	float* dev_r;
 	float* dev_aux_sum;
 	
+	INIT_RUNTIME;
 	cudaMalloc( (void**)&dev_aux_sum, maxR * sizeof(float) );
 	initializeArray<<<32,ceil(maxR/32.0)>>>(dev_aux_sum, maxR);
 	
@@ -1426,6 +1861,7 @@ float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* r
 
 	cudaFree(dev_aux_sum);	
 	cudaFree(dev_r);
+	END_RUNTIME; printf("\n[loop2]: "); PRINT_RUNTIME;
 	
 	int maxHlength = max(filterBankLength, numFiltros+1);
 	float* resFinal = (float*) calloc((maxR - maxHlength), sizeof(float));
@@ -1488,7 +1924,7 @@ void checkCUDAError(const char *msg) {
  *	NÃO ESTÁ SENDO USADO
  *
  */
-float* multiplyPolynomialCoefficients(float* vecA, const int vecASize, float* vecB, const int vecBSize) {
+float* multiplyPolynomialCoefficients_OLD(float* vecA, const int vecASize, float* vecB, const int vecBSize) {
 	int vecCSize = vecASize + vecBSize - 1;
 	int size = vecCSize * sizeof(float);
 	

@@ -28,10 +28,13 @@ float* whrtf (int elev, int azim, char ear, int* whrtfLength);
 
 
 // Extern functions
+extern void initCUDA(void);
 extern short* findDelay(float** hrtf, int length);
 extern float* shiftInParallel(float* vec, int vecLength, short delay, int maxLength);
 extern void coef_spars(char* filtro[], int filtroLength, float* ho1d, int ho1dLength, float** G_aux, int* G_size);
 extern float* resp_imp(char* filtros[], int numFiltros, double** G, int* G_size, int* resultLength);
+extern void coef_spars2(char* filtro[], int numFiltros, float* ho1d, int ho1dLength, float** G_aux, int* G_size);
+
 
 void printDelay(short* delay) {
 	for (int i = 0; i < 2; i++) {
@@ -49,6 +52,8 @@ void printDelayedHrtf(float* h, int vecLength) {
  *	Esta função retorna os coeficientes esparsos de uma hrtf com elevação e azimute conhecidos.
  */
 double** getCoefSpars(int elev, int azim, char ear, int* G_size) {
+	INIT_VARIABLES;
+	
 	float** hrtf = readHrtf(elev, azim, 'L', MIN_SAMPLE_NUMBER, MAX_SAMPLE_NUMBER);	
 	short* delay = findDelay(hrtf, MAX_SAMPLE_NUMBER - MIN_SAMPLE_NUMBER);
 	free(hrtf);
@@ -74,7 +79,10 @@ double** getCoefSpars(int elev, int azim, char ear, int* G_size) {
 	float** G_aux = NULL;
 	G_aux = (float**) malloc((NUM_FILTROS+1) * sizeof(float*));
 	
-	coef_spars(WAVELET, NUM_FILTROS, ho1d, length, G_aux, G_size);
+	INIT_RUNTIME;
+	//coef_spars(WAVELET, NUM_FILTROS, ho1d, length, G_aux, G_size);
+	coef_spars2(WAVELET, NUM_FILTROS, ho1d, length, G_aux, G_size);
+	END_RUNTIME; printf("\n[coef_spars2]: "); PRINT_RUNTIME;
 	
 	// TODO: implementar atraso = calc_delta(Wavelet);
 	int atraso[5] = {1, 1, 8, 22, 50};
